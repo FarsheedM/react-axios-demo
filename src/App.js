@@ -1,25 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+export default class Greetings extends React.Component{
+  state = {
+    greeting: []
+  }
+
+  componentDidMount(){
+    axios.get("/greeting",
+    {
+      headers: {
+        'Access-Control-Allow-Origin': 'https://localhost:8080',
+      },
+    },
+    )
+      .then(res => {
+        const greeting= res.data;
+        console.log("+++ some logs +++");
+        this.setState({greeting})
+      })
+  }
+
+
+  render(){
+    return(
+      <p>
+        greeting should come here:
+        {this.state.greeting}
+      </p>
+    )
+  }
+
 }
 
-export default App;
