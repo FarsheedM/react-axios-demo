@@ -38,5 +38,6 @@
       "last 1 safari version"
     ]
   },
+  //this solves the CORS issue by providing the http proxy for API requests
   "proxy": "http://localhost:8080"
 }
